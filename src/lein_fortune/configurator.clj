@@ -6,12 +6,12 @@
   (:require [clojure.contrib.zip-filter.xml :as zf])
   (:import (java.io File)))
 
-(def config (ref (zip/xml-zip (lxml/parse-trim (java.io.File. "./config/config-tst.xml")))))
+(def config (ref (zip/xml-zip (lxml/parse-trim (java.io.File. "./resources/config/config-tst.xml")))))
 
 (defn load-config 
   "loads an xml file (e.g. a config file and returns a structured map)"
   []
-  (xml/parse (File. "./config/config-tst.xml"))
+  (xml/parse (File. "./resources/config/config-tst.xml"))
   )
 
 (defn get-config-value 
@@ -22,11 +22,11 @@
 (defn set-config-value
   "sets a new value programatically to a config key"
   [value & tags]
-(ds/spit "./config/config-tst.xml"
+(ds/spit "./resources/config/config-tst.xml"
   (with-out-str
     (lxml/emit
       (zip/root
-       (zip/edit tags "./config/config-tst.xml" value)))))
+       (zip/edit tags "./resources/config/config-tst.xml" value)))))
 )
 
 

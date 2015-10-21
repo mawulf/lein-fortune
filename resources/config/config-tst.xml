@@ -2,6 +2,6 @@
 <config context="tst">
 	<load-random-fortune>false</load-random-fortune>
 	<max-slogan-count>3582</max-slogan-count>
-	<fortune-file-path>./data/fortunes.txt</fortune-file-path>
+	<fortune-file-path>./resources/data/fortunes.txt</fortune-file-path>
 	<test>3</test>
 </config>

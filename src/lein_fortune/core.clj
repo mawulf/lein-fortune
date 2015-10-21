@@ -3,7 +3,7 @@
   (:require [clojure.contrib.string])
   (:use compojure.core)
   (:use hiccup.core)
-  (:use hiccup.page-helpers)
+  (:use hiccup.page)
   (:import (java.util Random)))
 
 (defn read-fortune-data-file 
@@ -13,7 +13,8 @@
   (try
     (nth spl i)
     (catch Exception e
-      "no slogan available!" ))))
+      "There is no slogan available!"
+      ))))
 
 (defn start-fortune [i]
   (read-fortune-data-file (cf/get-config-value :fortune-file-path) i))
