@@ -1,0 +1,7 @@
+(defn view-output-random []
+     ((def rnd (Random.))
+       (println (. rnd (nextInt (Long/parseLong (cf/get-config-value :max-slogan-count)))))
+    ((let [rnr (. rnd (nextInt (Long/parseLong (cf/get-config-value :max-slogan-count))))])
+       (POST "/fortune" [rnr]
+    (let [[a] (parse-input rnr)]
+      (view-output a))))))
