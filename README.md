@@ -1,6 +1,8 @@
 # lein-fortune
 
-An simple webapp, to show fortune cookies
+A simple webapp, to show fortune cookies. 
+You can use it in manual or random mode(via config).
+
 
 ## Usage
 <code>lein.sh clean</code>
