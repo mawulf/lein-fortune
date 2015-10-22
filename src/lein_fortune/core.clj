@@ -1,9 +1,11 @@
 (ns lein_fortune.core
-  (:require [lein_fortune.configurator :as cf])
-  (:require [clojure.contrib.string])
+  (:require [lein_fortune.configurator :as cf]
+  [clojure.contrib.string])
+  
   (:use compojure.core)
   (:use hiccup.core)
   (:use hiccup.page)
+  (:use ring.middleware.params)
   (:import (java.util Random)))
 
 (defn read-fortune-data-file 
@@ -13,7 +15,7 @@
   (try
     (nth spl i)
     (catch Exception e
-      "There is no slogan available!"
+      "There is no slogan available!" e
       ))))
 
 (defn start-fortune [i]
@@ -45,9 +47,9 @@
     [:a.action {:href "/fortune"} "take another slogan"]))
 
 (defn parse-input [a]
-  [(try
+  (try
      (Long/parseLong a)
-     (catch NumberFormatException e 0))])
+     (catch NumberFormatException e 0)))
 
 (defn view-output-random []
   "shows a new slogan random generated"
@@ -67,7 +69,7 @@
     [:i [:font {:color "blue"} [:h1  "clojure-fortune"]]]
     [:h4 "insert number to show slogan"]
     [:form {:method "post" :action "/fortune"}
-      [:input.text {:type "text" :name "a"}]
+      [:input.text {:type "text" :id "a" :name "a"}]
       [:input.action {:type "submit" :value "show slogan"}]]))
 
 (defn view-input []
@@ -75,14 +77,21 @@
     (view-output-random)
   (view-default-input)))
 
-(defroutes app
+(defn debug [x]
+  (view-layout
+    [:h4 "Input was: " x])
+  )
+(defroutes my-routes
   ;; shows the default view
   (GET "/fortune" []
     (view-input))
   ;; shows the view with action
   (POST "/fortune" [a]
-    (let [[a] (parse-input a)]
-      (view-output a))))
+       (let [b (parse-input a)]
+        (view-output b))
+        ;;(debug req)
+        ))
 
+(def app (wrap-params my-routes))
 
 
