@@ -23,7 +23,7 @@ or
 
 Then go to
 
-http://localhost:3000/fortune
+[http://localhost:3000/fortune](http://localhost:3000/fortune)
 
 ## License
 
