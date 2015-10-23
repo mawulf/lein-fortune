@@ -13,9 +13,13 @@ You can use it in manual or random mode(via config).
 
 <code>lein.sh ring uberjar</code>
 
-To start the generated artefact:
+To start the generated artefact use either:
 
 <code>java -jar target/lein-fortune-[version]-standalone.jar</code>
+
+or
+
+<code>lein.sh ring server</code>
 
 Then go to
 
